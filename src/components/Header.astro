@@ -1,0 +1,18 @@
+---
+const pathname = Astro.url.pathname
+const home = pathname === '/'
+const links = [
+  { href: '/#about', label: 'About', active: false },
+  { href: '/#projects', label: 'Projects', active: pathname.startsWith('/projects') },
+  { href: '/experience', label: 'Experience', active: pathname === '/experience' },
+  { href: '/blog', label: 'Blog', active: pathname.startsWith('/blog') },
+]
+---
+<header class="site-header wrap">
+  <a href="/" class="wordmark" aria-label="Luis Beltran Jr., home">Luis Beltran Jr.</a>
+  <button class="menu-toggle" aria-expanded="false" aria-controls="navigation" hidden>Menu</button>
+  <nav id="navigation" aria-label="Main navigation">
+    {links.map(link => <a href={home && link.href.startsWith('/#') ? link.href.slice(1) : link.href} aria-current={link.active ? 'page' : undefined}>{link.label}</a>)}
+    <a class="contact-nav" href={home ? '#contact' : '/#contact'}>Contact</a>
+  </nav>
+</header>

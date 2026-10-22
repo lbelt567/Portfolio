@@ -1,0 +1,5 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { posts } from '../../lib/blog'
+---
+<Layout title="Blog" description="Luis's notes on AI, software engineering, and learning by building."><div class="wrap page-content" id="top"><header class="page-heading"><h1>Blog</h1><p>Notes on AI, engineering, and things worth figuring out.</p></header>{posts.map(post => <article class="blog-listing reveal"><a class="image-link" href={`/blog/${post.slug}`}><img src="/images/anthropicacademy.webp" alt="Anthropic Academy course catalog" width="1200" height="630" /></a><div><h2><a href={`/blog/${post.slug}`}>Learning to build<br />better with AI</a></h2><p class="secondary"><time datetime={post.date}>{new Date(post.date + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</time></p><p>{post.excerpt}</p><a class="text-link" href={`/blog/${post.slug}`}>Read article</a></div></article>)}</div></Layout>

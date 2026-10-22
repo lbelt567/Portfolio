@@ -1,0 +1,25 @@
+---
+import { profile } from "../lib/profile"
+---
+<dialog id="chat-dialog" class="chat-dialog" aria-labelledby="chat-title" data-ui>
+  <div class="chat-header">
+    <div><h2 id="chat-title">Ask about Luis</h2><p>An AI guide to my work and experience.</p></div>
+    <button type="button" id="chat-close" aria-label="Close chat">Close</button>
+  </div>
+  <div id="chat-messages" class="chat-messages" role="log" aria-live="polite" aria-relevant="additions text">
+    <p class="chat-intro">What would you like to know?</p>
+    <div class="chat-suggestions">
+      <button type="button" data-question="What did Luis build at Salesforce?">Work at Salesforce</button>
+      <button type="button" data-question="Tell me about Luis's fintech data pipeline.">The fintech pipeline</button>
+      <button type="button" data-question="What are Luis's strongest technical skills?">Technical skills</button>
+    </div>
+  </div>
+  <p id="chat-status" role="status"></p>
+  <form id="chat-form">
+    <label for="chat-input" class="sr-only">Your question</label>
+    <input id="chat-input" name="message" placeholder="Ask about my work…" maxlength="4000" required autocomplete="off" />
+    <button class="button" type="submit">Send</button>
+  </form>
+  <p class="chat-note">AI can make mistakes. <a href={`mailto:${profile.email}`}>Email me directly</a>.</p>
+</dialog>
+<script>import '../scripts/chat'</script>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 880" role="img" aria-labelledby="title description">
+  <title id="title">Polymarket Sentinel system architecture</title>
+  <desc id="description">Live WebSocket prices feed a waterfall detector and a Researcher, Analyst, Executor, Outcome Observer pipeline. SQLite stores hot data and Parquet with DuckDB supports backtesting.</desc>
+  <rect width="1400" height="880" fill="#dde3d7"/>
+  <g fill="#333231" font-family="Arial, sans-serif">
+    <text x="76" y="125" font-size="52">Polymarket Sentinel</text>
+    <text x="78" y="179" font-size="24">Real-time monitoring. A four-stage agent pipeline.</text>
+    <rect x="78" y="237" width="1244" height="126" fill="#f0f1eb"/>
+    <text x="112" y="292" font-size="30">200+ markets</text>
+    <text x="112" y="329" font-size="23">Live WebSocket prices</text>
+    <text x="526" y="308" font-size="32">→</text>
+    <text x="651" y="292" font-size="30">Waterfall detector</text>
+    <text x="651" y="329" font-size="23">Multiple timeframes</text>
+    <g fill="#506148"><rect x="78" y="420" width="268" height="132"/><rect x="404" y="420" width="268" height="132"/><rect x="730" y="420" width="268" height="132"/><rect x="1056" y="420" width="266" height="132"/></g>
+    <g fill="#ffffff" font-size="27" text-anchor="middle"><text x="212" y="496">Researcher</text><text x="538" y="496">Analyst</text><text x="864" y="496">Executor</text><text x="1189" y="480">Outcome</text><text x="1189" y="516">Observer</text></g>
+    <g font-size="32" text-anchor="middle"><text x="375" y="498">→</text><text x="701" y="498">→</text><text x="1027" y="498">→</text></g>
+    <text x="78" y="610" font-size="23">Lease-based queues · Typed contracts · Idempotent execution · Circuit breakers</text>
+    <rect x="78" y="664" width="596" height="130" fill="#f0f1eb"/><rect x="726" y="664" width="596" height="130" fill="#f0f1eb"/>
+    <text x="110" y="720" font-size="29">SQLite in WAL mode</text><text x="110" y="758" font-size="23">Hot storage</text>
+    <text x="758" y="720" font-size="29">Parquet + DuckDB</text><text x="758" y="758" font-size="23">Tick archives and backtesting</text>
+  </g>
+</svg>

@@ -23,5 +23,6 @@ export interface CaseStudy {
   metrics: ProjectMetric[]
   outcomes: string[]
   liveUrl: string | null
+  liveNote?: string
   githubUrl: string | null
 }

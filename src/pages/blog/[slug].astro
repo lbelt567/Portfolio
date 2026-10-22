@@ -1,0 +1,10 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { posts } from '../../lib/blog'
+import { marked } from 'marked'
+import sanitizeHtml from 'sanitize-html'
+export function getStaticPaths() { return posts.map(post => ({ params: { slug: post.slug }, props: { post } })) }
+const { post } = Astro.props
+const content = sanitizeHtml(await marked.parse(post.content))
+---
+<Layout title={post.title} description={post.excerpt} image="/images/anthropicacademy.webp"><div class="wrap" id="top"><article class="article-layout"><header class="page-heading"><a href="/blog" class="back-link">All posts</a><h1>Learning to build<br />better with AI</h1><p class="article-original-title">{post.title}</p><p class="secondary"><time datetime={post.date}>March 30, 2026</time></p></header><img class="article-cover" src="/images/anthropicacademy.webp" alt="Anthropic Academy course catalog" width="1200" height="630" /><div class="prose" set:html={content} /><div class="article-bottom"><a class="text-link" href="/blog">Back to blog</a></div></article></div></Layout>

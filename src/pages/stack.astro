@@ -1,0 +1,5 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { skills } from '../lib/experience'
+---
+<Layout title="Technical stack" description="The programming languages, frameworks, data tools, and engineering concepts behind Luis's work."><div class="wrap page-content" id="top"><header class="page-heading"><h1>My toolkit</h1><p>The languages and tools I use to turn a problem into a working system.</p></header>{Object.entries(skills).map(([category, items]) => <section class="skills-group reveal"><h2>{category}</h2><div class="stack-list">{items.map(item => <span>{item}</span>)}</div></section>)}<div class="case-actions"><a class="button" href="/#projects">See them in practice</a></div></div></Layout>

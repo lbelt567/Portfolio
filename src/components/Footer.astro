@@ -1,0 +1,14 @@
+---
+import { profile } from '../lib/profile'
+const year = new Date().getFullYear()
+---
+<footer class="site-footer wrap">
+  <div class="footer-top">
+    <a href="/" class="footer-name">Luis Beltran Jr.</a>
+    <p>AI &amp; solutions engineering.<br />Independent building.</p>
+  </div>
+  <div class="footer-bottom">
+    <p>© {year} Luis Beltran Jr.</p>
+    <div><a href="/lab">Lab</a><a href="/stack">Stack</a><a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a><a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a><button type="button" class="chat-open footer-chat" hidden>Ask about Luis</button><a href="#top">Back to top</a></div>
+  </div>
+</footer>

@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { education, workHistory } from '../lib/experience'
+import { posts } from '../lib/blog'
+import { portfolio } from '../lib/portfolio'
+import { profile } from '../lib/profile'
+const featured = portfolio[0]
+const post = posts[0]
+---
+<Layout>
+  <section class="hero wrap" id="top" aria-labelledby="hero-title">
+    <div class="hero-portrait reveal"><img src="/images/profile-research.webp" alt="Luis Beltran Jr. presenting his Tauroi Technologies research at the Harvey Mudd Clinic showcase" width="1000" height="1333" fetchpriority="high" /></div>
+    <div class="hero-copy">
+      <h1 id="hero-title">AI &amp; software engineering</h1>
+      <p class="hero-summary">I’m Luis, a USC computer science graduate student working across AI, software, and solutions engineering.</p>
+      <div class="hero-action"><a class="button" href="#projects">Explore projects <span aria-hidden="true">↗</span></a><a class="text-link" href="#about">A little about me</a></div>
+      <p class="hero-history">Experience at SST Automation, Leather Corral, Salesforce, and Bank of America.</p>
+    </div>
+  </section>
+
+  <section class="about-section" id="about" aria-labelledby="about-title">
+    <div class="wrap about-grid">
+      <div class="about-intro">
+        <h2 class="reveal" id="about-title">A little about me</h2>
+        <p class="statement reveal">I like working where engineering meets a real problem.</p>
+        <p class="reveal">At SST Automation, I designed industrial gateway configuration software and built a go-to-market pipeline for data center customers. At Leather Corral, I connected e-commerce, international sourcing, and day-to-day operations.</p>
+        <a class="text-link" href="/experience">Explore my experience</a>
+      </div>
+      <div class="about-copy">
+        <p class="reveal">I’m pursuing a Master of Science in Computer Science, Artificial Intelligence at USC, with graduation expected in May 2028. I earned my B.A. in Computer Science at Claremont McKenna College through Harvey Mudd College in May 2025.</p>
+        <p class="reveal">My projects span prediction market monitoring, a four-stage AI agent trading pipeline, financial research with Tauroi Technologies, and semantic search across more than 4,000 AI tools.</p>
+        <div class="education-summary reveal">{education.map(item => <div><p class="education-school">{item.school}</p><p>{item.degree}</p>{item.coursework && <p class="education-coursework">Relevant coursework: {item.coursework.join(", ")}</p>}<p class="secondary">{item.dateRange}{item.gpa && ` · GPA ${item.gpa}`}</p></div>)}</div>
+        <a class="text-link" href="/stack">Explore my technical stack</a>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="work-section wrap" id="projects" aria-labelledby="projects-title">
+    <span id="work" aria-hidden="true"></span>
+    <div class="section-heading reveal"><h2 id="projects-title">Projects</h2><p>From real-time markets to industrial automation.<br class="desktop-break" /> Software, research, and businesses I’ve built.</p></div>
+    <div class="project-ledger">
+      <div class="project-options" aria-label="Choose a project preview">
+        {portfolio.map((project, i) => <article class:list={['project-option', { selected: i === 0 }]} data-project={project.slug}>
+          <button class="project-select" data-preview={project.slug} aria-pressed={i === 0} hidden><span>{project.title}</span><span class="project-kind">{project.type}</span></button>
+          <a class="project-fallback" href={project.href} target={project.external ? "_blank" : undefined} rel={project.external ? "noopener noreferrer" : undefined}>{project.title}</a>
+          <p class="project-description">{project.description}</p>
+          <a class="case-link" href={project.href} target={project.external ? "_blank" : undefined} rel={project.external ? "noopener noreferrer" : undefined}>{project.action}</a>
+        </article>)}
+        <a class="text-link lab-link" href="/lab">See what’s in the lab</a>
+      </div>
+      <div class="project-preview reveal" id="project-preview">
+        <a href={featured.href} class="project-preview-image" id="preview-link" aria-label={`View ${featured.title} case study`}><img id="preview-image" src={featured.image} alt={`${featured.title} system architecture diagram`} width="1400" height="770" loading="lazy" /></a>
+        <div id="preview-text" class="preview-text" hidden><h3 id="preview-title"></h3><p id="preview-description"></p><a id="preview-action" class="case-link"></a></div>
+        <div class="preview-caption"><p id="preview-caption">{featured.subtitle}</p><p id="preview-date">{featured.dateRange}</p></div>
+        <div class="preview-stack" id="preview-stack">{featured.stack.slice(0, 4).map(item => <span>{item}</span>)}</div>
+      </div>
+    </div>
+    <script type="application/json" id="project-data" set:html={JSON.stringify(portfolio).replace(/</g, '\u003c')} />
+  </section>
+
+
+  <section class="experience-section wrap" id="experience" aria-labelledby="experience-title">
+    <div class="section-heading reveal"><h2 id="experience-title">Experience</h2><a class="text-link" href="/experience">The full story</a></div>
+    <div class="experience-list">
+      {workHistory.map(role => <article class="experience-row reveal"><div><h3>{role.company}</h3><p>{role.title.split(",")[0]}</p><p class="secondary">{role.dateRange}</p></div><p>{role.achievements[0]}</p></article>)}
+    </div>
+  </section>
+
+
+  <section class="writing-section wrap" id="writing" aria-labelledby="writing-title">
+    <div class="section-heading reveal"><h2 id="writing-title">Blog</h2><a href="/blog" class="text-link">All posts</a></div>
+    <article class="writing-feature">
+      <a class="image-link reveal" href={`/blog/${post.slug}`}><img src="/images/anthropicacademy.webp" alt="Anthropic Academy course catalog" width="1200" height="630" loading="lazy" /></a>
+      <div class="writing-copy reveal"><h3><a href={`/blog/${post.slug}`}>Learning to build<br />better with AI</a></h3><p class="secondary"><time datetime={post.date}>March 30, 2026</time></p><p>{post.excerpt}</p><a class="text-link" href={`/blog/${post.slug}`}>Read the article</a></div>
+    </article>
+  </section>
+
+  <section class="contact-section" id="contact" aria-labelledby="contact-title">
+    <div class="wrap"><div class="contact-heading reveal"><h2 id="contact-title">Let’s talk.</h2><p>{profile.opportunityStatement} Have a role or a project in mind?</p></div><a class="contact-email reveal" href={`mailto:${profile.email}`}>{profile.email}</a><div class="contact-bottom"><div><a href={profile.phoneHref}>{profile.phone}</a><a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a><a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a></div><button type="button" class="chat-open text-link" hidden>Ask my AI assistant</button></div></div>
+  </section>
+</Layout>

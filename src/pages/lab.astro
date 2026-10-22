@@ -1,0 +1,5 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { experiments } from '../lib/site'
+---
+<Layout title="The lab" description="Experiments in prediction markets, LLM trading signals, market data, and AI search."><div class="wrap page-content" id="top"><header class="page-heading"><h1>The lab</h1><p>Open questions, active experiments, and the next iteration.</p></header><div class="lab-list">{experiments.map(experiment => <article class="lab-entry reveal"><div><h2>{experiment.name}</h2><p class="secondary">{experiment.status}</p></div><div><p>{experiment.description}</p><div class="stack-list">{experiment.stack.map(item => <span>{item}</span>)}</div>{experiment.url && <a class="text-link" href={experiment.url} target="_blank" rel="noopener noreferrer">Explore project</a>}</div></article>)}</div></div></Layout>
