@@ -16,7 +16,7 @@
     "@astrojs/vercel": "^11.0.16",
     "@fontsource/bodoni-moda": "^5.2.8",
     "@fontsource/jost": "^5.2.8",
-    "ai": "^6.0.312",
+    "ai": "^7.0.144",
     "astro": "^7.4.2",
     "marked": "^17.0.0",
     "sanitize-html": "^2.17.0"
