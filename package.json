@@ -12,7 +12,7 @@
     "test:security": "node scripts/test-chat-security.mjs"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^3.0.135",
+    "@ai-sdk/anthropic": "^4.0.83",
     "@astrojs/vercel": "^11.0.16",
     "@fontsource/bodoni-moda": "^5.2.8",
     "@fontsource/jost": "^5.2.8",
