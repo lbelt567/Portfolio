@@ -1,22 +1,83 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 880" role="img" aria-labelledby="title description">
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1040" viewBox="0 0 1600 1040" role="img" aria-labelledby="title description">
   <title id="title">Polymarket Sentinel system architecture</title>
-  <desc id="description">Live WebSocket prices feed a waterfall detector and a Researcher, Analyst, Executor, Outcome Observer pipeline. SQLite stores hot data and Parquet with DuckDB supports backtesting.</desc>
-  <rect width="1400" height="880" fill="#dde3d7"/>
-  <g fill="#333231" font-family="Arial, sans-serif">
-    <text x="76" y="125" font-size="52">Polymarket Sentinel</text>
-    <text x="78" y="179" font-size="24">Real-time monitoring. A four-stage agent pipeline.</text>
-    <rect x="78" y="237" width="1244" height="126" fill="#f0f1eb"/>
-    <text x="112" y="292" font-size="30">200+ markets</text>
-    <text x="112" y="329" font-size="23">Live WebSocket prices</text>
-    <text x="526" y="308" font-size="32">→</text>
-    <text x="651" y="292" font-size="30">Waterfall detector</text>
-    <text x="651" y="329" font-size="23">Multiple timeframes</text>
-    <g fill="#506148"><rect x="78" y="420" width="268" height="132"/><rect x="404" y="420" width="268" height="132"/><rect x="730" y="420" width="268" height="132"/><rect x="1056" y="420" width="266" height="132"/></g>
-    <g fill="#ffffff" font-size="27" text-anchor="middle"><text x="212" y="496">Researcher</text><text x="538" y="496">Analyst</text><text x="864" y="496">Executor</text><text x="1189" y="480">Outcome</text><text x="1189" y="516">Observer</text></g>
-    <g font-size="32" text-anchor="middle"><text x="375" y="498">→</text><text x="701" y="498">→</text><text x="1027" y="498">→</text></g>
-    <text x="78" y="610" font-size="23">Lease-based queues · Typed contracts · Idempotent execution · Circuit breakers</text>
-    <rect x="78" y="664" width="596" height="130" fill="#f0f1eb"/><rect x="726" y="664" width="596" height="130" fill="#f0f1eb"/>
-    <text x="110" y="720" font-size="29">SQLite in WAL mode</text><text x="110" y="758" font-size="23">Hot storage</text>
-    <text x="758" y="720" font-size="29">Parquet + DuckDB</text><text x="758" y="758" font-size="23">Tick archives and backtesting</text>
+  <desc id="description">200+ prediction markets stream prices over WebSocket into a multi-timeframe waterfall detector. Researcher, Analyst, Executor and Outcome Observer form a four-stage AI pipeline with lease-based queues and typed contracts. Execution uses idempotent orders and circuit breakers. SQLite in WAL mode provides hot storage; Parquet and DuckDB support archives and backtesting. Six asynchronous tasks run with Docker and systemd.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M2 1 8 5 2 9" fill="none" stroke="#b8dec8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="ink-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M2 1 8 5 2 9" fill="none" stroke="#1b332c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="1040" fill="#151d21"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <!-- Project identity and verified system scale. -->
+    <text x="72" y="125" fill="#f4f3ec" font-size="69" font-weight="600" letter-spacing="-3">Polymarket Sentinel</text>
+    <text x="75" y="175" fill="#a7b5b8" font-size="24">Live market monitoring. A four-stage AI pipeline.</text>
+    <g fill="#b8dec8" font-size="49" letter-spacing="-2">
+      <text x="1000" y="111">200+</text>
+      <text x="1205" y="111">4</text>
+      <text x="1390" y="111">6</text>
+    </g>
+    <g fill="#a7b5b8" font-size="20">
+      <text x="1000" y="151">Markets</text>
+      <text x="1205" y="151">AI stages</text>
+      <text x="1390" y="151">Async tasks</text>
+    </g>
+
+    <!-- Input and detection are connected by the live price stream. -->
+    <rect x="72" y="240" width="590" height="207" rx="16" fill="#223039"/>
+    <text x="104" y="290" fill="#a7b5b8" font-size="21">Market data</text>
+    <text x="104" y="344" fill="#f4f3ec" font-size="38" letter-spacing="-1">WebSocket ingestion</text>
+    <text x="104" y="391" fill="#bfcbcd" font-size="23">Continuous prediction-market prices</text>
+    <circle cx="662" cy="344" r="6" fill="#b8dec8"/>
+    <path d="M674 344H850" fill="none" stroke="#b8dec8" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="708" y="318" fill="#a7b5b8" font-size="19">Price stream</text>
+    <rect x="866" y="240" width="662" height="207" rx="16" fill="#223039"/>
+    <text x="898" y="290" fill="#a7b5b8" font-size="21">Signal detection</text>
+    <text x="898" y="344" fill="#f4f3ec" font-size="38" letter-spacing="-1">Waterfall detector</text>
+    <text x="898" y="391" fill="#bfcbcd" font-size="23">Significant changes across multiple timeframes</text>
+
+    <!-- Detected changes enter the pipeline at the Researcher stage. -->
+    <circle cx="1197" cy="447" r="6" fill="#b8dec8"/>
+    <path d="M1197 459V479Q1197 495 1181 495H248Q232 495 232 511V528" fill="none" stroke="#b8dec8" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="619" y="477" width="292" height="34" rx="6" fill="#151d21"/>
+    <text x="765" y="500" fill="#a7b5b8" font-size="19" text-anchor="middle">Detected market changes</text>
+
+    <!-- One continuous execution lane, with explicit handoffs between agents. -->
+    <rect x="72" y="544" width="1456" height="255" rx="16" fill="#b8dec8"/>
+    <text x="104" y="590" fill="#1b332c" font-size="22" font-weight="600">AI agent pipeline</text>
+    <text x="1496" y="590" fill="#345347" font-size="20" text-anchor="end">Lease-based queues · Typed contracts</text>
+    <g fill="#1b332c" font-size="31" letter-spacing="-.7">
+      <text x="104" y="659">Researcher</text>
+      <text x="480" y="659">Analyst</text>
+      <text x="856" y="659">Executor</text>
+      <text x="1210" y="659">Outcome</text>
+      <text x="1210" y="697">Observer</text>
+    </g>
+    <g fill="#345347" font-size="21">
+      <text x="104" y="697">Research context</text>
+      <text x="480" y="697">Signal analysis</text>
+      <text x="856" y="697">Order execution</text>
+      <text x="1210" y="731">Outcome tracking</text>
+    </g>
+    <g fill="none" stroke="#1b332c" stroke-width="2.5" marker-end="url(#ink-arrow)">
+      <path d="M330 650H427"/>
+      <path d="M691 650H803"/>
+      <path d="M1058 650H1157"/>
+    </g>
+    <text x="104" y="761" fill="#1b332c" font-size="21">Execution controls: idempotent orders + circuit breakers</text>
+
+    <!-- The two storage paths preserve their distinct roles. -->
+    <rect x="72" y="838" width="708" height="130" rx="16" fill="#223039"/>
+    <rect x="804" y="838" width="724" height="130" rx="16" fill="#223039"/>
+    <text x="104" y="886" fill="#f4f3ec" font-size="30" letter-spacing="-.5">SQLite</text>
+    <text x="748" y="886" fill="#b8dec8" font-size="20" text-anchor="end">Hot storage</text>
+    <text x="104" y="930" fill="#a7b5b8" font-size="22">WAL mode</text>
+    <text x="836" y="886" fill="#f4f3ec" font-size="30" letter-spacing="-.5">Parquet + DuckDB</text>
+    <text x="1496" y="886" fill="#b8dec8" font-size="20" text-anchor="end">Historical research</text>
+    <text x="836" y="930" fill="#a7b5b8" font-size="22">Tick archives and backtesting</text>
+    <text x="75" y="1009" fill="#a7b5b8" font-size="18">Python / asyncio</text>
+    <text x="1525" y="1009" fill="#a7b5b8" font-size="18" text-anchor="end">Docker · Health checks · systemd</text>
   </g>
 </svg>

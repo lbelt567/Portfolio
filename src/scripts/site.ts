@@ -53,11 +53,11 @@ if (data?.textContent) {
         link.hidden = !project.image
         if (textPreview) textPreview.hidden = !!project.image
         if (project.image) image.src = project.image
-        image.alt = `${project.title} project preview`
-        link.href = project.href
-        link.target = project.external ? '_blank' : '_self'
-        link.rel = project.external ? 'noopener noreferrer' : ''
-        link.setAttribute('aria-label', `${project.action}: ${project.title}`)
+        image.alt = project.imageAlt ?? `${project.title} project preview`
+        link.href = project.liveUrl ?? project.href
+        link.target = project.liveUrl || project.external ? '_blank' : '_self'
+        link.rel = project.liveUrl || project.external ? 'noopener noreferrer' : ''
+        link.setAttribute('aria-label', project.liveUrl ? `Visit ${project.title} website` : `${project.action}: ${project.title}`)
         if (previewTitle) previewTitle.textContent = project.title
         if (previewDescription) previewDescription.textContent = project.description
         if (previewAction) {

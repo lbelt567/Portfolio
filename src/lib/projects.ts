@@ -2,10 +2,56 @@ import type { CaseStudy } from "@/types/project"
 
 export const projects: CaseStudy[] = [
   {
+    slug: 'steadyfollow',
+    title: 'SteadyFollow',
+    subtitle: 'Bilingual follow-up automation for local trade and supply businesses',
+    heroImage: '/images/steadyfollow-site.webp',
+    imageAlt: 'SteadyFollow homepage with its logo, “Your follow-ups, automated” headline, business-counter photography, and booking invitation.',
+    type: 'Founder & Engineer',
+    dateRange: 'Ongoing',
+    problem: 'Small businesses lose repeat customers simply because nobody has time to follow up. Growing up around my family’s upholstery supply business, I saw customers slip away after a single purchase and large accounts quietly move to a competitor, with no system to notice.',
+    solution: 'Founded SteadyFollow to set up and manage follow-up systems for local trade and supply businesses in Los Angeles and the Inland Empire. I built the brand, a mobile-first marketing website, and a reusable CRM system, with an English/Spanish offering for Spanish-speaking owners.',
+    sections: [
+      {
+        title: 'Marketing website',
+        description: 'Built a mobile-first, bilingual site with Astro and deployed it on Cloudflare Workers. The site includes an embedded booking calendar, a Content Security Policy and other security headers, local business structured data for search, and privacy-friendly analytics.',
+      },
+      {
+        title: 'Reusable CRM',
+        description: 'Built the CRM in GoHighLevel and saved it as a reusable template that can be installed for each new client.',
+        items: [
+          'Customer records include personal notes, lead source, preferred language, and purchase history.',
+          'Customer stages: New Lead → Quoted → First Order → Repeat → Large Account.',
+          'Follow-up schedule: Day 0 welcome email → Day 3 call reminder → Day 7 email → Day 14 call → Day 30 check-in. The sequence stops as soon as the customer orders.',
+          'Alerts flag large accounts that go quiet so the business can reconnect.',
+        ],
+      },
+      {
+        title: 'AI-assisted follow-up',
+        description: 'GoHighLevel workflows use OpenAI to draft personalized follow-up emails and call scripts from each customer’s purchase history and notes. A human review step comes before automated message delivery.',
+      },
+    ],
+    stack: ['Astro', 'Cloudflare Workers', 'GoHighLevel', 'OpenAI', 'JavaScript / TypeScript', 'English/Spanish i18n'],
+    stackNodes: [],
+    metrics: [
+      { label: 'Businesses served', value: '2' },
+      { label: 'Monthly service fee', value: '$350' },
+      { label: 'Languages', value: 'English / Spanish' },
+    ],
+    outcomes: [
+      'Built follow-up automations for two small businesses, with positive feedback so far.',
+      'Charge $350 per month to set up and manage the follow-up service.',
+      'Created a reusable CRM template for onboarding each new client.',
+    ],
+    liveUrl: 'https://steadyfollow.com',
+    githubUrl: null,
+  },
+  {
     slug: 'polymarket-sentinel',
     title: 'Polymarket Sentinel',
     subtitle: 'Real-time prediction market monitoring and an AI agent trading pipeline',
     heroImage: '/images/polymarket-sentinel.svg',
+    imageAlt: 'Polymarket Sentinel architecture: live WebSocket prices pass through a waterfall detector into Researcher, Analyst, Executor, and Outcome Observer agents, with execution controls, SQLite hot storage, and Parquet/DuckDB archives.',
     type: 'Real-time systems / AI agents',
     dateRange: 'March 2026 – Present',
     problem: 'Monitoring hundreds of prediction markets requires continuous price ingestion, a way to identify meaningful changes over multiple timeframes, and reliable data storage for later research. Agent-driven trading also needs explicit execution and risk controls.',

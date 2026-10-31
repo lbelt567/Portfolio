@@ -45,12 +45,15 @@ const post = posts[0]
           <button class="project-select" data-preview={project.slug} aria-pressed={i === 0} hidden><span>{project.title}</span><span class="project-kind">{project.type}</span></button>
           <a class="project-fallback" href={project.href} target={project.external ? "_blank" : undefined} rel={project.external ? "noopener noreferrer" : undefined}>{project.title}</a>
           <p class="project-description">{project.description}</p>
-          <a class="case-link" href={project.href} target={project.external ? "_blank" : undefined} rel={project.external ? "noopener noreferrer" : undefined}>{project.action}</a>
+          <div class="project-actions">
+            {project.liveUrl && <a class="button" href={project.liveUrl} target="_blank" rel="noopener noreferrer">Visit website</a>}
+            <a class="case-link" href={project.href} target={project.external ? "_blank" : undefined} rel={project.external ? "noopener noreferrer" : undefined}>{project.action}</a>
+          </div>
         </article>)}
         <a class="text-link lab-link" href="/lab">See what’s in the lab</a>
       </div>
       <div class="project-preview reveal" id="project-preview">
-        <a href={featured.href} class="project-preview-image" id="preview-link" aria-label={`View ${featured.title} case study`}><img id="preview-image" src={featured.image} alt={`${featured.title} system architecture diagram`} width="1400" height="770" loading="lazy" /></a>
+        <a href={featured.liveUrl ?? featured.href} class="project-preview-image" id="preview-link" target={featured.liveUrl || featured.external ? "_blank" : undefined} rel={featured.liveUrl || featured.external ? "noopener noreferrer" : undefined} aria-label={featured.liveUrl ? `Visit ${featured.title} website` : `View ${featured.title} case study`}><img id="preview-image" src={featured.image} alt={featured.imageAlt ?? `${featured.title} project preview`} width="1400" height="770" loading="lazy" /></a>
         <div id="preview-text" class="preview-text" hidden><h3 id="preview-title"></h3><p id="preview-description"></p><a id="preview-action" class="case-link"></a></div>
         <div class="preview-caption"><p id="preview-caption">{featured.subtitle}</p><p id="preview-date">{featured.dateRange}</p></div>
         <div class="preview-stack" id="preview-stack">{featured.stack.slice(0, 4).map(item => <span>{item}</span>)}</div>

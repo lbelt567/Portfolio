@@ -39,6 +39,7 @@ ${projects.map(project => `**${project.title}**
 - ${project.subtitle}
 - Dates: ${project.dateRange}
 - What was built: ${project.solution}
+${project.sections?.map(section => `- ${section.title}: ${section.description ?? ''}${section.items ? ` ${section.items.join(' ')}` : ''}`).join('\n') ?? ''}
 - Stack: ${project.stack.join(', ')}
 ${project.outcomes.map(item => `- ${item}`).join('\n')}${project.liveUrl ? `\n- Live URL: ${project.liveUrl}` : ''}${project.liveNote ? `\n- Current website status: ${project.liveNote}` : ''}${project.githubUrl ? `\n- GitHub: ${project.githubUrl}` : ''}`).join('\n\n')}
 

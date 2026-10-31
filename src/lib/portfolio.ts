@@ -10,7 +10,9 @@ export interface PortfolioEntry {
   description: string
   subtitle: string
   image: string | null
+  imageAlt?: string
   href: string
+  liveUrl: string | null
   external: boolean
   action: string
   dateRange: string
@@ -25,7 +27,9 @@ export const portfolio: PortfolioEntry[] = [
     description: projectSummaries[project.slug],
     subtitle: project.subtitle,
     image: projectImage(project.heroImage),
+    imageAlt: project.imageAlt,
     href: `/projects/${project.slug}`,
+    liveUrl: project.liveUrl,
     external: false,
     action: 'Read case study',
     dateRange: project.dateRange,
@@ -39,6 +43,7 @@ export const portfolio: PortfolioEntry[] = [
     description: venture.description,
     subtitle: venture.description,
     href: venture.url,
+    liveUrl: null,
     external: true,
     action: 'Visit website',
     dateRange: venture.revenue ? `Reported revenue: ${venture.revenue}` : '',

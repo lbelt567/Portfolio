@@ -14,10 +14,12 @@ export interface CaseStudy {
   title: string
   subtitle: string
   heroImage: string
+  imageAlt?: string
   type: string
   dateRange: string
   problem: string
   solution: string
+  sections?: { title: string; description?: string; items?: string[] }[]
   stack: string[]
   stackNodes: StackNode[]
   metrics: ProjectMetric[]

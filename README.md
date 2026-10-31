@@ -57,9 +57,11 @@ by the adapter; `npm run dev` supports the full site and server endpoint locally
 | Colors, spacing, typography, responsive layouts | `src/styles/global.css` |
 | Metadata and shared page structure | `src/layouts/Layout.astro` |
 
-Existing routes remain: `/experience`, `/stack`, `/lab`, `/blog`, all five
+Existing routes remain: `/experience`, `/stack`, `/lab`, `/blog`, all six
 `/projects/[slug]` case studies, and the existing blog URL. About precedes the unified `#projects` section, which includes both case studies
-and the website/business projects in one eight-item selector with a shared image preview.
+and the website/business projects in one selector with a shared image preview.
+SteadyFollow is the first project and default preview, with its full case study at
+`/projects/steadyfollow`. Its service fee is $350/month; this is pricing, not a revenue claim.
 Contact is the `#contact` section on the home page.
 The previous `#work` anchor remains available for existing links. `robots.txt`, `sitemap.xml`, and a custom 404 are included.
 
@@ -67,6 +69,9 @@ Original pictures remain in `public/`; compressed WebP versions in `public/image
 are used by the redesign. Font license notices are in `public/licenses/`.
 The research portrait leads the home page. The Polymarket preview is a labeled
 architecture diagram drawn from the supplied resume, not an application screenshot.
+The SteadyFollow preview is a high-resolution screenshot of https://steadyfollow.com,
+captured on October 30, 2026. Its preview image links directly to the website;
+the project entry and case-study header also provide prominent live-site buttons.
 Preserve the original project screenshots and research portrait when updating assets.
 
 Verify availability, current employment, GPA, revenue and project status with Luis
